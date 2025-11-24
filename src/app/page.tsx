@@ -1,18 +1,30 @@
+import Image from "next/image";
 import ProcedureCard from "@/components/ProcedureCard";
 import ProcedureFooter from "@/components/ProcedureFooter";
 import ProcedureHeader from "@/components/ProcedureHeader";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[100vh] w-full flex-col items-center bg-transparent px-5 py-8 sm:px-10 md:min-h-[100dvh]">
-      <div className="flex h-full w-full max-w-[760px] flex-1 flex-col">
+    <main className="flex min-h-[100vh] w-full flex-col items-center bg-transparent px-4 py-5 sm:px-6 md:min-h-[100dvh]">
+      <div className="relative flex h-full w-full max-w-[760px] flex-1 flex-col gap-6 sm:gap-8">
+        <div className="flex justify-center">
+          <Image
+            src="/brand/logo-blanco-car.png"
+            alt="Logotipo Consultorio Carlos Rios"
+            width={76}
+            height={76}
+            className="pointer-events-none w-[76px] opacity-70"
+            priority
+          />
+        </div>
+
         <ProcedureHeader
           tag="Sala de espera"
           title="Selecciona el procedimiento"
           description="Responde este cuestionario para personalizar tu atención y confirmar que estás listo para comenzar."
         />
 
-        <section className="mt-10 flex flex-1 flex-col gap-8">
+        <section className="flex flex-1 flex-col gap-6">
           <ProcedureCard
             label="Procedimiento"
             title="Extracción de biopolímeros"
