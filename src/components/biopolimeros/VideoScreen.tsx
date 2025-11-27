@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+// TODO: Restaurar import cuando se habilite disabled en el botón
+// import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { VideoPlayer } from "@/components/ui/video-player"
@@ -24,7 +25,8 @@ export function VideoScreen({
   backRoute,
 }: VideoScreenProps) {
   const router = useRouter()
-  const [videoEnded, setVideoEnded] = useState(false)
+  // TODO: Restaurar cuando se habilite disabled en el botón
+  // const [videoEnded, setVideoEnded] = useState(false)
 
   return (
     <main className="flex min-h-[100vh] w-full flex-col items-center bg-transparent px-4 py-5 sm:px-6 md:min-h-[100dvh]">
@@ -47,7 +49,8 @@ export function VideoScreen({
             url={videoUrl}
             title={title}
             hideControls={true}
-            onVideoEnd={() => setVideoEnded(true)}
+            // TODO: Restaurar cuando se habilite disabled en el botón
+            // onVideoEnd={() => setVideoEnded(true)}
             className="animate-fade-up"
           />
 

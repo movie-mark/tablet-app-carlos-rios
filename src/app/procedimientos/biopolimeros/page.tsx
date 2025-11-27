@@ -45,13 +45,11 @@ const formSchema = z.object({
   antecedentesMedicos: z.string().optional(),
   alergias: z.string().optional(),
   medicamentosActuales: z.string().optional(),
-  tieneBiopolimeros: z.enum(["si", "no", "no-se"], {
-    required_error: "Por favor selecciona una opción.",
-  }),
+  tieneBiopolimeros: z.enum(["si", "no", "no-se"]),
   ubicacionBiopolimeros: z.string().optional(),
   tiempoTranscurrido: z.string().optional(),
   sintomas: z.array(z.string()).optional(),
-  haTenidoComplicaciones: z.boolean().default(false),
+  haTenidoComplicaciones: z.boolean(),
   consentimiento: z.boolean().refine((val) => val === true, {
     message: "Debes aceptar el consentimiento informado para continuar.",
   }),

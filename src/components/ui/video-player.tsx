@@ -109,7 +109,8 @@ export function VideoPlayer({
   const [youtubeApiReady, setYoutubeApiReady] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const vimeoPlayerRef = useRef<Player | null>(null)
-  const youtubePlayerRef = useRef<unknown>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const youtubePlayerRef = useRef<any>(null)
   const playerIdRef = useRef(`video-player-${Math.random().toString(36).substr(2, 9)}`)
 
   const embedInfo = useMemo(
@@ -159,7 +160,7 @@ export function VideoPlayer({
       return
 
     try {
-      youtubePlayerRef.current = new window.YT.Player(iframeRef.current, {
+      youtubePlayerRef.current = new window.YT.Player(playerIdRef.current, {
         videoId: embedInfo.videoId,
         events: {
           onReady: () => {
