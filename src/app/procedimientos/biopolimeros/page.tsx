@@ -118,6 +118,10 @@ export default function BiopolimerosFormPage() {
                 url="https://www.youtube.com/embed/NdcygytQlYQ?si=43EP0Qh6U3Xs9Qu_"
                 title="¿Por qué necesitamos tu información personal?"
                 description="Tu información personal nos ayuda a brindarte una atención más segura y personalizada. Mantenemos la confidencialidad de todos tus datos."
+                hideControls={true}
+                onVideoEnd={() => {
+                  console.log("Video de información personal completado")
+                }}
               />
 
               <FormField
@@ -179,6 +183,10 @@ export default function BiopolimerosFormPage() {
                 url="https://www.youtube.com/embed/NdcygytQlYQ?si=43EP0Qh6U3Xs9Qu_"
                 title="Importancia de describir tu motivo de consulta"
                 description="Conocer el motivo de tu consulta nos permite prepararnos mejor y ofrecerte la atención más adecuada desde el primer momento."
+                hideControls={true}
+                onVideoEnd={() => {
+                  console.log("Video de motivo de consulta completado")
+                }}
               />
 
               <FormField
@@ -213,6 +221,10 @@ export default function BiopolimerosFormPage() {
                 url="https://www.youtube.com/embed/NdcygytQlYQ?si=43EP0Qh6U3Xs9Qu_"
                 title="¿Por qué es importante conocer tus antecedentes médicos?"
                 description="Conocer tus antecedentes médicos, alergias y medicamentos actuales es fundamental para garantizar tu seguridad durante el procedimiento."
+                hideControls={true}
+                onVideoEnd={() => {
+                  console.log("Video de antecedentes médicos completado")
+                }}
               />
 
               <FormField
@@ -279,6 +291,10 @@ export default function BiopolimerosFormPage() {
                 url="https://www.youtube.com/embed/NdcygytQlYQ?si=43EP0Qh6U3Xs9Qu_"
                 title="Importancia de conocer tus biopolímeros"
                 description="Esta información es crucial para planificar el procedimiento de extracción de manera segura y efectiva. Cada detalle cuenta."
+                hideControls={true}
+                onVideoEnd={() => {
+                  console.log("Video de biopolímeros completado")
+                }}
               />
 
               <FormField

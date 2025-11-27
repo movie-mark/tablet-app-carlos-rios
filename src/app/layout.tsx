@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { BiopolimerosFormProvider } from "@/contexts/BiopolimerosFormContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground antialiased min-h-screen`}
       >
-        {children}
+        <BiopolimerosFormProvider>{children}</BiopolimerosFormProvider>
       </body>
     </html>
   );

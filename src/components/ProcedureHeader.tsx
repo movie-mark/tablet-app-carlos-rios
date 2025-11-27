@@ -15,12 +15,12 @@ type ProcedureHeaderProps = {
 
 const ProcedureHeader: FC<ProcedureHeaderProps> = ({ tag, title, description }) => {
   return (
-    <header className="space-y-3 animate-fade-up">
+    <header className="space-y-3 animate-fade-up text-center">
       <p className="text-xs uppercase tracking-[0.4em] text-accent/80">{tag}</p>
       <h1 className="text-[clamp(2.6rem,5vw,3.4rem)] font-semibold leading-[1.05] text-foreground">
         {title}
       </h1>
-      <p className="max-w-[32ch] text-base text-foreground/70">{description}</p>
+      <p className="max-w-[32ch] text-base text-foreground/70 mx-auto">{description}</p>
     </header>
   );
 };

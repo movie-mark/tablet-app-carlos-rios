@@ -1,23 +1,61 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { Play, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Player from "@vimeo/player"
+
+// Tipos para YouTube IFrame API
+declare global {
+  interface Window {
+    YT: {
+      Player: new (
+        elementId: string,
+        config: {
+          videoId: string
+          events: {
+            onStateChange: (event: { data: number }) => void
+            onReady?: (event: { target: unknown }) => void
+            onError?: (event: { data: number }) => void
+          }
+          playerVars?: {
+            autoplay?: number
+            controls?: number
+            modestbranding?: number
+            rel?: number
+            enablejsapi?: number
+          }
+        }
+      ) => void
+      PlayerState: {
+        ENDED: number
+        PLAYING: number
+        PAUSED: number
+        BUFFERING: number
+        CUED: number
+      }
+    }
+    onYouTubeIframeAPIReady?: () => void
+  }
+}
 
 type VideoPlayerProps = {
   url: string // URL de YouTube o Vimeo
   title?: string
   description?: string
   className?: string
+  hideControls?: boolean // Ocultar controles del reproductor
+  onVideoEnd?: () => void // Callback cuando el video termina
 }
 
 type EmbedInfo = {
   provider: "youtube" | "vimeo"
+  videoId: string
   embedUrl: string
 }
 
-function extractEmbedInfo(url: string): EmbedInfo | null {
+function extractEmbedInfo(url: string, hideControls: boolean): EmbedInfo | null {
   const trimmedUrl = url.trim()
 
   const youtubePatterns = [
@@ -29,9 +67,11 @@ function extractEmbedInfo(url: string): EmbedInfo | null {
     const match = trimmedUrl.match(pattern)
     if (match?.[1]) {
       const videoId = match[1]
+      const controlsParam = hideControls ? "&controls=0" : ""
       return {
         provider: "youtube",
-        embedUrl: `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1`,
+        videoId,
+        embedUrl: `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1&enablejsapi=1${controlsParam}`,
       }
     }
   }
@@ -45,9 +85,11 @@ function extractEmbedInfo(url: string): EmbedInfo | null {
     const match = trimmedUrl.match(pattern)
     if (match?.[1]) {
       const videoId = match[1]
+      const controlsParam = hideControls ? "&controls=0" : ""
       return {
         provider: "vimeo",
-        embedUrl: `https://player.vimeo.com/video/${videoId}?autoplay=1`,
+        videoId,
+        embedUrl: `https://player.vimeo.com/video/${videoId}?autoplay=1${controlsParam}`,
       }
     }
   }
@@ -55,9 +97,172 @@ function extractEmbedInfo(url: string): EmbedInfo | null {
   return null
 }
 
-export function VideoPlayer({ url, title, description, className }: VideoPlayerProps) {
+export function VideoPlayer({
+  url,
+  title,
+  description,
+  className,
+  hideControls = false,
+  onVideoEnd,
+}: VideoPlayerProps) {
   const [showPlayer, setShowPlayer] = useState(false)
-  const embedInfo = useMemo(() => extractEmbedInfo(url), [url])
+  const [youtubeApiReady, setYoutubeApiReady] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const vimeoPlayerRef = useRef<Player | null>(null)
+  const youtubePlayerRef = useRef<unknown>(null)
+  const playerIdRef = useRef(`video-player-${Math.random().toString(36).substr(2, 9)}`)
+
+  const embedInfo = useMemo(
+    () => extractEmbedInfo(url, hideControls),
+    [url, hideControls]
+  )
+
+  // Cargar YouTube IFrame API
+  useEffect(() => {
+    if (!showPlayer || !embedInfo || embedInfo.provider !== "youtube") return
+
+    // Si ya está cargada, marcar como lista
+    if (window.YT?.Player) {
+      setYoutubeApiReady(true)
+      return
+    }
+
+    // Cargar el script de YouTube IFrame API
+    const script = document.createElement("script")
+    script.src = "https://www.youtube.com/iframe_api"
+    script.async = true
+
+    window.onYouTubeIframeAPIReady = () => {
+      setYoutubeApiReady(true)
+    }
+
+    document.body.appendChild(script)
+
+    return () => {
+      // Limpiar
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
+    }
+  }, [showPlayer, embedInfo])
+
+  // Inicializar YouTube Player cuando la API esté lista
+  useEffect(() => {
+    if (
+      !showPlayer ||
+      !embedInfo ||
+      embedInfo.provider !== "youtube" ||
+      !youtubeApiReady ||
+      !iframeRef.current ||
+      youtubePlayerRef.current
+    )
+      return
+
+    try {
+      youtubePlayerRef.current = new window.YT.Player(iframeRef.current, {
+        videoId: embedInfo.videoId,
+        events: {
+          onReady: () => {
+            console.log("YouTube player ready")
+          },
+          onStateChange: (event) => {
+            // YT.PlayerState.ENDED = 0
+            if (event.data === 0 && onVideoEnd) {
+              onVideoEnd()
+            }
+          },
+          onError: (event) => {
+            console.error("YouTube player error:", event)
+          },
+        },
+        playerVars: {
+          autoplay: 1,
+          controls: hideControls ? 0 : 1,
+          modestbranding: 1,
+          rel: 0,
+          enablejsapi: 1,
+        },
+      })
+    } catch (error) {
+      console.error("Error initializing YouTube player:", error)
+    }
+
+    return () => {
+      if (youtubePlayerRef.current) {
+        try {
+          youtubePlayerRef.current.destroy()
+        } catch (error) {
+          console.error("Error destroying YouTube player:", error)
+        }
+        youtubePlayerRef.current = null
+      }
+    }
+  }, [showPlayer, embedInfo, youtubeApiReady, hideControls, onVideoEnd])
+
+  // Inicializar Vimeo Player
+  useEffect(() => {
+    if (
+      !showPlayer ||
+      !embedInfo ||
+      embedInfo.provider !== "vimeo" ||
+      !iframeRef.current ||
+      vimeoPlayerRef.current
+    )
+      return
+
+    try {
+      vimeoPlayerRef.current = new Player(iframeRef.current, {
+        id: parseInt(embedInfo.videoId),
+        autoplay: true,
+        controls: !hideControls,
+      })
+
+      vimeoPlayerRef.current.on("ended", () => {
+        if (onVideoEnd) {
+          onVideoEnd()
+        }
+      })
+
+      vimeoPlayerRef.current.on("error", (error) => {
+        console.error("Vimeo player error:", error)
+      })
+    } catch (error) {
+      console.error("Error initializing Vimeo player:", error)
+    }
+
+    return () => {
+      if (vimeoPlayerRef.current) {
+        try {
+          vimeoPlayerRef.current.destroy()
+        } catch (error) {
+          console.error("Error destroying Vimeo player:", error)
+        }
+        vimeoPlayerRef.current = null
+      }
+    }
+  }, [showPlayer, embedInfo, hideControls, onVideoEnd])
+
+  // Limpiar al cerrar el player
+  useEffect(() => {
+    if (!showPlayer) {
+      if (youtubePlayerRef.current) {
+        try {
+          youtubePlayerRef.current.destroy()
+        } catch (error) {
+          console.error("Error destroying YouTube player:", error)
+        }
+        youtubePlayerRef.current = null
+      }
+      if (vimeoPlayerRef.current) {
+        try {
+          vimeoPlayerRef.current.destroy()
+        } catch (error) {
+          console.error("Error destroying Vimeo player:", error)
+        }
+        vimeoPlayerRef.current = null
+      }
+    }
+  }, [showPlayer])
 
   if (!showPlayer) {
     return (
@@ -141,6 +346,8 @@ export function VideoPlayer({ url, title, description, className }: VideoPlayerP
 
       <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black">
         <iframe
+          ref={iframeRef}
+          id={playerIdRef.current}
           src={embedInfo.embedUrl}
           title={title ?? "Video informativo"}
           className="h-full w-full"
@@ -158,4 +365,3 @@ export function VideoPlayer({ url, title, description, className }: VideoPlayerP
     </div>
   )
 }
-

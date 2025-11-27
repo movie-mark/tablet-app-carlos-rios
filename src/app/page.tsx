@@ -1,13 +1,11 @@
 "use client"
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import ProcedureCard from "@/components/ProcedureCard";
-import ProcedureFooter from "@/components/ProcedureFooter";
-import ProcedureHeader from "@/components/ProcedureHeader";
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import ProcedureCard from "@/components/ProcedureCard"
 
 export default function Home() {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <main className="flex min-h-[100vh] w-full flex-col items-center bg-transparent px-4 py-5 sm:px-6 md:min-h-[100dvh]">
@@ -16,39 +14,39 @@ export default function Home() {
           <Image
             src="/brand/logo-blanco-car.png"
             alt="Logotipo Consultorio Carlos Rios"
-            width={76}
-            height={76}
-            className="pointer-events-none w-[76px] opacity-70"
+            width={100}
+            height={100}
+            className="pointer-events-none w-[100px] opacity-70"
             priority
           />
         </div>
 
-        <ProcedureHeader
-          tag="Sala de espera"
-          title="Selecciona el procedimiento"
-          description="Responde este cuestionario para personalizar tu atención y confirmar que estás listo para comenzar."
-        />
-
         <section className="flex flex-1 flex-col gap-6 animate-fade-up">
           <ProcedureCard
-            label="Procedimiento"
-            title="Extracción de biopolímeros"
-            description="Inicia el cuestionario de anamnesis y confirmación específica para el procedimiento de extracción."
+            label="Acción"
+            title="Prepara tu cita"
+            description="Completa el cuestionario para que podamos preparar tu consulta de manera personalizada."
             image={{
               src: "/procedures/biopolimeros.jpeg",
-              alt: "Ilustración extracción de biopolímeros",
+              alt: "Preparar cita",
               sizes: "(max-width: 640px) 70vw, (max-width: 1024px) 55vw, 420px",
             }}
-            onClick={() => router.push("/procedimientos/biopolimeros")}
+            onClick={() => router.push("/preparar-cita")}
+          />
+
+          <ProcedureCard
+            label="Información"
+            title="Conoce los procedimientos"
+            description="Explora información detallada sobre los diferentes procedimientos que ofrecemos."
+            image={{
+              src: "/procedures/biopolimeros.jpeg",
+              alt: "Conocer procedimientos",
+              sizes: "(max-width: 640px) 70vw, (max-width: 1024px) 55vw, 420px",
+            }}
+            onClick={() => router.push("/procedimientos")}
           />
         </section>
-
-        <ProcedureFooter
-          ctaLabel="Consentimientos informados"
-          hint="(Disponible próximamente)"
-          disabled
-        />
       </div>
     </main>
-  );
+  )
 }
