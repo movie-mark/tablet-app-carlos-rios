@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: dark;
+  /* Colores personalizados originales */
   --background: #050608;
   --foreground: #f5f7fa;
   --surface: #0b0d10;
@@ -11,6 +12,26 @@
   --accent: #3ac2f2;
   --accent-muted: rgba(58, 194, 242, 0.16);
   --accent-ring: rgba(58, 194, 242, 0.45);
+  
+  /* Variables CSS para shadcn/ui - mapeadas desde nuestros colores */
+  --primary: 200 100% 50%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 15%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 210 40% 10%;
+  --muted-foreground: 215 20% 65%;
+  --accent-shadcn: 200 100% 50%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 210 40% 18%;
+  --input: 210 40% 18%;
+  --ring: 200 100% 50%;
+  --radius: 0.5rem;
+  --card: 210 40% 4%;
+  --card-foreground: 210 40% 98%;
+  --popover: 210 40% 4%;
+  --popover-foreground: 210 40% 98%;
 }
 
 *, *::before, *::after {
@@ -42,5 +63,51 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
   }
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { FC, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * Tarjeta de procedimiento reutilizable.
@@ -40,7 +41,9 @@ const ProcedureCard: FC<ProcedureCardProps> = ({
       type="button"
       onClick={onClick}
       aria-label={ariaLabel ?? title}
-      className="group relative flex min-h-[clamp(18rem,44vh,28rem)] flex-col justify-between overflow-hidden rounded-tablet-xl border border-surface-muted/60 bg-surface px-7 py-8 text-left shadow-tablet transition-all duration-300 hover:-translate-y-1 hover:shadow-tablet-glow focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
+      className={cn(
+        "group relative flex min-h-[clamp(18rem,44vh,28rem)] flex-col justify-between overflow-hidden rounded-tablet-xl border border-surface-muted/60 bg-surface px-7 py-8 text-left shadow-tablet transition-all duration-300 hover:-translate-y-1 hover:shadow-tablet-glow focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring animate-fade-up"
+      )}
     >
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <div className="absolute inset-0 bg-gradient-to-br from-accent-muted via-transparent to-transparent" />
