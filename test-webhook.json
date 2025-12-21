@@ -1,0 +1,122 @@
+{
+  "informacionGeneral": {
+    "procedimiento": "Extracción de Biopolímeros",
+    "fechaEnvio": "2024-01-15T14:30:00.000Z",
+    "fechaEnvioFormateada": "15 de enero de 2024, 14:30"
+  },
+  "datosBasicosPaciente": {
+    "nombre": "María",
+    "apellido": "González",
+    "tipoDocumento": "cedula",
+    "numeroDocumento": "1234567890",
+    "correoElectronico": "maria.gonzalez@ejemplo.com",
+    "numeroWhatsApp": "+57 300 123 4567"
+  },
+  "procedimientoOriginal": {
+    "anosDesdeAplicacion": "5 años",
+    "quienAplico": "esteticista",
+    "nombrePersonaAplico": "No recuerdo el nombre",
+    "dondeFue": "Bogotá, Colombia",
+    "nombreLugar": "Centro de estética en el norte",
+    "sustanciaAplicada": "Me dijeron que era ácido hialurónico",
+    "cantidadAplicada": "No recuerdo la cantidad exacta",
+    "numeroSesiones": "1 sesión",
+    "tratamientosPosteriores": "Ninguno",
+    "notasAdicionales": "El procedimiento se realizó en un centro de estética",
+    "preguntasParaDoctor": "¿Es posible extraer completamente la sustancia?"
+  },
+  "inicioSintomas": {
+    "tiempoEntreProcedimientoYSintomas": "meses",
+    "haceCuantoComenzaron": "Hace 2 años",
+    "notasAdicionales": "Los síntomas comenzaron gradualmente",
+    "preguntasParaDoctor": "¿Por qué tardaron tanto en aparecer?"
+  },
+  "sintomasFisicos": {
+    "sintomasSeleccionados": [
+      "Cambios en color de piel",
+      "Inflamación",
+      "Aumento de volumen",
+      "Dolor / ardor",
+      "Sensación de temperatura elevada"
+    ],
+    "detallesColorPiel": "Piel oscura y a veces muy roja",
+    "localizacionEspecifica": "Glúteos y región lumbar",
+    "sensacionTemperatura": "Sensación de calor como plancha caliente",
+    "irradiacionHormigueo": "Hormigueo que se irradia a las piernas hasta las rodillas",
+    "calambres": "Calambres en toda la pierna ocasionalmente",
+    "notasAdicionales": "Los síntomas empeoran cuando estoy sentada mucho tiempo",
+    "preguntasParaDoctor": "¿Estos síntomas son reversibles?"
+  },
+  "limitacionFuncional": {
+    "puedeEstarSentadoMuchoTiempo": "a-veces",
+    "puedeDormirBien": "a-veces",
+    "haDejadoTrabajarEstudiar": "frecuente",
+    "vecesIncapacitado": "3 veces durante este período",
+    "dolorArticulaciones": "Manos, hombros, rodillas",
+    "dolorMuscular": "Principalmente en la espalda",
+    "notasAdicionales": "El dolor me impide hacer actividades normales",
+    "preguntasParaDoctor": "¿Podré volver a hacer ejercicio después del tratamiento?"
+  },
+  "sintomasSistemicos": {
+    "sintomasSeleccionados": [
+      "Fatiga",
+      "Insomnio",
+      "Dolor muscular",
+      "Dolor articular",
+      "Boca seca",
+      "Ojos secos",
+      "Cambios de memoria",
+      "Cambios de ánimo",
+      "Depresión"
+    ],
+    "detallesPorSintoma": [
+      {
+        "sintoma": "Fatiga",
+        "frecuencia": "frecuente",
+        "medicamento": "No tomo medicamento para esto"
+      },
+      {
+        "sintoma": "Insomnio",
+        "frecuencia": "frecuente",
+        "medicamento": "Melatonina ocasionalmente"
+      },
+      {
+        "sintoma": "Depresión",
+        "frecuencia": "a-veces",
+        "medicamento": "No"
+      },
+      {
+        "sintoma": "Dolor articular",
+        "frecuencia": "frecuente",
+        "medicamento": "Ibuprofeno cuando duele mucho"
+      }
+    ],
+    "notasAdicionales": "Los síntomas sistémicos comenzaron después de los físicos",
+    "preguntasParaDoctor": "¿Estos síntomas están relacionados con los biopolímeros?"
+  },
+  "impactoEmocionalSocial": {
+    "evitaPlayaGimnasioPiscina": "mucho",
+    "afectaVidaSocial": "moderado",
+    "afectaVidaSexual": "mucho",
+    "afectaAutoestima": "mucho",
+    "verguenzaExamenMedico": "moderado",
+    "notasAdicionales": "Me da mucha vergüenza mostrar mi cuerpo",
+    "preguntasParaDoctor": "¿Podré recuperar mi confianza después del tratamiento?"
+  },
+  "atencionMedicaPrevia": {
+    "haConsultadoMedicos": "si",
+    "vecesConsultoEPS": "5 veces",
+    "leNegaronAtencion": "si",
+    "queRespuestaTuvo": "Me dijeron que no podían hacer nada, que era algo estético y no médico",
+    "notasAdicionales": "He consultado varios médicos sin obtener ayuda",
+    "preguntasParaDoctor": "¿Por qué otros médicos no me ayudaron?"
+  },
+  "informacionFinal": {
+    "loMasImportante": "Lo más importante para mí es recuperar mi calidad de vida. Los síntomas me han limitado mucho y afectan mi trabajo, mi vida social y mi autoestima. Necesito saber si hay esperanza de mejorar.",
+    "condicionesMedicasPreexistentes": "Síndrome de intestino irritable (colon irritable)",
+    "notasAdicionales": "Estoy muy ansiosa por esta consulta y espero poder encontrar una solución",
+    "preguntasParaDoctor": "¿Cuál es el pronóstico después de la extracción?"
+  }
+}
+
+

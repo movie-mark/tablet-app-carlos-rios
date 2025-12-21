@@ -38,13 +38,7 @@ export type BiopolimerosFormData = {
   // Sección 3: Síntomas físicos
   seccion3?: {
     sintomasFisicos?: string[]
-    detallesColorPiel?: string
-    localizacionEspecifica?: string
-    sensacionTemperatura?: string
-    irradiacionHormigueo?: string
-    calambres?: string
     notasAdicionales?: string
-    preguntasDoctor?: string
   }
   // Sección 4: Limitación funcional
   seccion4?: {
@@ -239,13 +233,7 @@ export function BiopolimerosFormProvider({ children }: { children: ReactNode }) 
       sintomasFisicos: formData.seccion3
         ? {
             sintomasSeleccionados: formData.seccion3.sintomasFisicos || [],
-            detallesColorPiel: formData.seccion3.detallesColorPiel,
-            localizacionEspecifica: formData.seccion3.localizacionEspecifica,
-            sensacionTemperatura: formData.seccion3.sensacionTemperatura,
-            irradiacionHormigueo: formData.seccion3.irradiacionHormigueo,
-            calambres: formData.seccion3.calambres,
             notasAdicionales: formData.seccion3.notasAdicionales,
-            preguntasParaDoctor: formData.seccion3.preguntasDoctor,
           }
         : null,
 
